@@ -15,12 +15,14 @@ const state = {
 
 // Positive Feedback Messages for Psychological Safety
 const feedbackMessages = [
-  "Nice Challenge!",
-  "Great Data!",
-  "Keep Going!",
-  "Learn & Adapt!",
-  "Good Try!",
-  "Excellent Pivot!"
+  "本気の失敗にこそ価値がある！",
+  "失敗は、次への貴重なデータだ。",
+  "ナイス・チャレンジ！",
+  "素晴らしいトライです！",
+  "まずはやってみたことに拍手！",
+  "完璧じゃなくていい、進もう！",
+  "それは、挑戦の証ですね！",
+  "ナイストライ！次へ活かそう"
 ];
 
 // DOM Elements
