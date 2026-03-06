@@ -33,7 +33,7 @@ jobs:
           
       - name: Build Vite App
         run: |
-          npm ci
+          npm install
           npm run build
           
       - name: Setup Pages
