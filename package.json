@@ -1,0 +1,14 @@
+{
+  "name": "72",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node node_modules/vite/bin/vite.js",
+    "build": "node node_modules/vite/bin/vite.js build",
+    "preview": "node node_modules/vite/bin/vite.js preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
