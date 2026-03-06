@@ -17,4 +17,8 @@ description: GitHubへの自動連携（自動コミット＆プッシュ）、.
    - 今回のアクション内容に基づいた適切で具体的なコミットメッセージを生成し、`git commit -m "<メッセージ>"` を実行する。
 6. **[Auto Push]**:
    - `git branch -M main` を実行してデフォルトブランチを `main` に設定。
-   - `git push -u origin main` を実行する。
+7. **[Workflow Monitoring]**:
+   - `curl -s https://api.github.com/repos/<username>/<repo>/actions/runs` などを利用して、最新のGitHub Actionsワークフローの実行ステータスを取得する。
+   - `status: "completed", conclusion: "success"` (All checks have passed) になるまで一定間隔でポーリング監視を行う。
+   - エラー (`conclusion: "failure"`) が発生した場合は即座にログを解析し、修正コミット・Pushを自動実行する。
+   - ワークフローの成功を見届けるまでを「実装完了の定義 (Definition of Done)」とする。
