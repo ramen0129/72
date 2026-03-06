@@ -13,6 +13,16 @@ const state = {
   volume: 1.0
 };
 
+// Positive Feedback Messages for Psychological Safety
+const feedbackMessages = [
+  "Nice Challenge!",
+  "Great Data!",
+  "Keep Going!",
+  "Learn & Adapt!",
+  "Good Try!",
+  "Excellent Pivot!"
+];
+
 // DOM Elements
 const elements = {
   bells: Array.from(document.querySelectorAll('.bell-btn')),
@@ -118,8 +128,9 @@ function playNewAudio(btn, soundFile) {
   state.currentAudio = audio;
   state.currentBellId = btn.id;
 
-  // Visuals
+  // Visuals & Positive Feedback
   setActiveVisuals(btn);
+  showPositiveFeedback();
 
   // Play
   audio.play().catch(err => console.error('Audio playback failed:', err));
@@ -223,5 +234,41 @@ function clearAllActiveVisuals() {
       ring.classList.add('opacity-0');
     }
   });
+}
+
+/**
+ * Displays a transient positive feedback toast
+ */
+function showPositiveFeedback() {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  // Select random message
+  const msg = feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
+
+  // Create toast element
+  const toast = document.createElement('div');
+  toast.className = 'bg-white/90 backdrop-blur-md shadow-lg border border-indigo-100 rounded-2xl px-5 py-3 text-indigo-700 font-medium tracking-wide text-sm md:text-base transform transition-all duration-500 ease-out translate-y-4 opacity-0';
+  toast.textContent = msg;
+
+  // Append and animate in
+  container.appendChild(toast);
+
+  // Trigger reflow to ensure the transition applies
+  void toast.offsetWidth;
+
+  toast.classList.remove('translate-y-4', 'opacity-0');
+  toast.classList.add('translate-y-0', 'opacity-100');
+
+  // Animate out and remove after 3.5 seconds
+  setTimeout(() => {
+    toast.classList.remove('translate-y-0', 'opacity-100');
+    toast.classList.add('-translate-y-4', 'opacity-0');
+    setTimeout(() => {
+      if (toast.parentNode === container) {
+        container.removeChild(toast);
+      }
+    }, 500); // Wait for fade out transition
+  }, 3500);
 }
 
